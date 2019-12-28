@@ -1,3 +1,4 @@
+console.clear();
 const data = {
   f01: {
     name: "Alice",
@@ -30,3 +31,16 @@ const data = {
     follows: ["f05"]
   }
 };
+
+const biggestFollower = function(dataObj) {
+  let maxFollow = 0,
+  objWithMostFollow = {};
+  for (const obj in data) {
+    if (data[obj].follows.length > maxFollow) {
+      maxFollow = data[obj].follows.length;
+      objWithMostFollow = data[obj];
+    }
+	}
+	return objWithMostFollow;
+};
+console.log(biggestFollower(data));
