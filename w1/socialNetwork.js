@@ -56,6 +56,21 @@ const getMaxPropertyOfObject = function (obj) {
 			 Object.values(obj));
  });
 };
+const nameOfId = function (obj, id) {
+	return obj[id].name;
+}
+const followedBy = function (obj) {
+	let output = {}, followedBy = [];
+	for (const id in obj) {
+		output[obj[id].name] = [];		
+	}
+	for (const id in obj) {
+		(obj[id].follows).forEach(item => {
+			output[obj[item].name].push(obj[id].name)				
+		})
+	}
+	console.log(output)
+}
 /*
 const mostPopular = function (obj) {
 	let followerPerProfileId = {};
@@ -80,3 +95,19 @@ const mostPopular = function (obj) {
 }
 console.log(mostPopular(data));
 */
+const printAll = function (obj) {
+	let output = {};
+	for (const id in obj) {
+		output[obj[id].name] = {
+			follows: (obj[id].follows).map(id => {return obj[id].name}),
+			followedBy: []
+		}
+	}
+	for (const id in obj) {
+		(obj[id].follows).forEach(item => {
+			output[[obj[item].name]].followedBy.push(obj[id].name)
+		})
+	}
+	console.log(output);
+}
+printAll(data)
