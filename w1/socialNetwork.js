@@ -31,20 +31,6 @@ const data = {
     follows: ["f05"]
   }
 };
-/*
-const biggestFollower = function(dataObj) {
-  let maxFollow = 0,
-  objWithMostFollow = {};
-  for (const obj in data) {
-    if (data[obj].follows.length > maxFollow) {
-      maxFollow = data[obj].follows.length;
-      objWithMostFollow = data[obj];
-    }
-	}
-	return objWithMostFollow;
-};
-console.log(biggestFollower(data));
-*/
 
 // ----- HELPER FUNCTIONS -------------------------//
 const commonItems = function (arr1, arr2) {
@@ -71,7 +57,28 @@ const followedBy = function (obj) {
 	}
 	console.log(output)
 }
-/*
+const filterOddOnes = function (arr1, arr2) {
+  output = arr1.filter((name) => {
+    return !arr2.includes(name);
+  })
+  return output;
+}
+// ---------- END OF HELPER FUNCTIONS --------------- //
+// ---------- MAIN FUNCTIONS STARTS ----------------- //
+// -------------------------------------------------- //
+const biggestFollower = function(dataObj) {
+  let maxFollow = 0,
+  objWithMostFollow = {};
+  for (const obj in data) {
+    if (data[obj].follows.length > maxFollow) {
+      maxFollow = data[obj].follows.length;
+      objWithMostFollow = data[obj];
+    }
+	}
+	return objWithMostFollow;
+};
+// console.log(biggestFollower(data));
+
 const mostPopular = function (obj) {
 	let followerPerProfileId = {};
 	let maxFollowerProfileId = [];
@@ -93,8 +100,8 @@ const mostPopular = function (obj) {
 	})
 	return mostPopularName; 
 }
-console.log(mostPopular(data));
-*/
+// console.log(mostPopular(data));
+
 const printAll = function (obj) {
 	let output = {};
 	for (const id in obj) {
@@ -108,6 +115,17 @@ const printAll = function (obj) {
 			output[[obj[item].name]].followedBy.push(obj[id].name)
 		})
 	}
-	console.log(output);
+	return output;
 }
-printAll(data)
+
+const unrequitedFollowers = function (obj) {
+	const userData = printAll(obj);
+	for (const name in userData) {
+		let following = userData[name].follows;
+		let followedBy = userData[name].followedBy;
+		let notFollowedBy = filterOddOnes(following, followedBy);
+		userData[name].doesNotFollowBack = notFollowedBy;
+	}
+	return userData;
+}
+// console.log(unrequitedFollowers(data))
