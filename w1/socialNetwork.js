@@ -31,7 +31,7 @@ const data = {
     follows: ["f05"]
   }
 };
-
+/*
 const biggestFollower = function(dataObj) {
   let maxFollow = 0,
   objWithMostFollow = {};
@@ -44,3 +44,39 @@ const biggestFollower = function(dataObj) {
 	return objWithMostFollow;
 };
 console.log(biggestFollower(data));
+*/
+
+// ----- HELPER FUNCTIONS -------------------------//
+const commonItems = function (arr1, arr2) {
+	return arr1.filter(element => arr2.includes(element));
+};
+const getMaxPropertyOfObject = function (obj) {
+	return Object.keys(obj).filter(x => {
+			 return obj[x] === Math.max.apply(null, 
+			 Object.values(obj));
+ });
+};
+/*
+const mostPopular = function (obj) {
+	let followerPerProfileId = {};
+	let maxFollowerProfileId = [];
+	let mostPopularName = {};
+	const profileId = Object.keys(obj);
+	for (const id in obj) {
+		let common = commonItems(profileId, obj[id].follows);
+		common.forEach(item => {
+			if (!followerPerProfileId.hasOwnProperty(item)) {
+				followerPerProfileId[item] = 1;
+			} else {
+				followerPerProfileId[item]++;
+			}
+		})
+	}
+	maxFollowerProfileId = getMaxPropertyOfObject(followerPerProfileId);
+	maxFollowerProfileId.forEach(id => {
+		mostPopularName[id] = obj[id].name;
+	})
+	return mostPopularName; 
+}
+console.log(mostPopular(data));
+*/
