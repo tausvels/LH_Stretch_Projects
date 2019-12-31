@@ -1,9 +1,21 @@
+console.clear();
 const wrapLog = function (callback, name) {
-  /* your code here */
+	/* your code here */
+	if (name === 'area') {
+		return function(x,y) {
+			console.log(`${name}(${x}, ${y}) =>`, callback(x,y));
+		}
+	} else {
+		if (name === 'volume') {
+			return function(x,y,z) {
+				console.log(`${name}(${x}, ${y}, ${z}) =>`, callback(x,y,z));
+			}
+		}
+	} 
 };
 
 const area = function (x, y) {
-  return x * y;
+	return x * y;
 };
 const logArea = wrapLog(area, "area");
 
